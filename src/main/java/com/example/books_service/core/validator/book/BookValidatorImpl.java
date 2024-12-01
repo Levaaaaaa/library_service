@@ -1,7 +1,7 @@
-package com.example.books_service.validator.book;
+package com.example.books_service.core.validator.book;
 
 import com.example.books_service.core.dto.Book;
-import com.example.books_service.validator.ValidationError;
+import com.example.books_service.core.validator.ValidationError;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -14,11 +14,13 @@ import java.util.stream.Collectors;
 @Component
 class BookValidatorImpl implements BookValidator{
     @Override
-    public Set<ValidationError<Book>> validate(Book book) {
+    public Set<ValidationError> validate(Book book) {
         try (ValidatorFactory vf = Validation.buildDefaultValidatorFactory()) {
             Validator validator = vf.getValidator();
-            Set<ConstraintViolation<Book>> violations = validator.validate(book);
-            return violations.stream().map(ValidationError::new).collect(Collectors.toSet());
+            return validator.validate(book).stream()
+                    .map(ConstraintViolation::getMessage)
+                    .map(ValidationError::new)
+                    .collect(Collectors.toSet());
         }
     }
 }

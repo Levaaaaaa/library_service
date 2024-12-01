@@ -1,6 +1,6 @@
-package com.example.books_service.core.response;
+package com.example.books_service.core.validator;
 
-import com.example.books_service.core.dto.Book;
+import jakarta.validation.ConstraintViolation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddBookResponse {
-    private Book book;
-
+public class ValidationError {
+    private String description;
 }

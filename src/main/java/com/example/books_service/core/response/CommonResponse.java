@@ -1,17 +1,19 @@
-package com.example.books_service.core.request;
+package com.example.books_service.core.response;
 
 import com.example.books_service.core.dto.Book;
-import jakarta.validation.constraints.NotNull;
+import com.example.books_service.core.validator.ValidationError;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddBookRequest {
-    @NotNull(message = "Book must not be null")
+public class CommonResponse {
     private Book book;
+    private Set<ValidationError> errors;
 }

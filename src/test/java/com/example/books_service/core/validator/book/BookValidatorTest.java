@@ -1,14 +1,13 @@
-package com.example.books_service.validator.book;
+package com.example.books_service.core.validator.book;
 
 import com.example.books_service.core.dto.Author;
 import com.example.books_service.core.dto.Book;
 import com.example.books_service.core.dto.builder.BookBuilder;
-import com.example.books_service.validator.ValidationError;
+import com.example.books_service.core.validator.book.BookValidator;
+import jakarta.validation.ConstraintViolation;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Set;
@@ -28,6 +27,18 @@ public class BookValidatorTest {
     }
 
     @Test
+    public void correctBook() {
+        book = BookBuilder.create()
+                .withISBN("1234567891011")
+                .withTitle("Title")
+                .withGenre(List.of("genre"))
+                .withDescription("description")
+                .withAuthor(new Author())
+                .build();
+        assertTrue(validator.validate(book).isEmpty());
+    }
+
+    @Test
     public void IsbnIsNull() {
         book = BookBuilder.create()
                 .withTitle("Title")
@@ -35,8 +46,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 
     @Test
@@ -48,8 +58,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(2, errors.size());
+        assertEquals(2, validator.validate(book).size());
     }
 
     @Test
@@ -61,8 +70,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 
     @Test
@@ -74,8 +82,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 
     @Test
@@ -87,8 +94,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 
     @Test
@@ -99,8 +105,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
     @Test
     public void titleIsEmpty() {
@@ -111,10 +116,18 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 
+    @Test
+    public void titleIsNullAndIsbnIsNull() {
+        book = BookBuilder.create()
+                .withGenre(List.of("genre"))
+                .withDescription("description")
+                .withAuthor(new Author())
+                .build();
+        assertEquals(2, validator.validate(book).size());
+    }
     @Test
     public void GenreIsNull() {
         book = BookBuilder.create()
@@ -123,8 +136,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 
     @Test
@@ -136,8 +148,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 
     @Test
@@ -149,8 +160,7 @@ public class BookValidatorTest {
                 .withDescription("description")
                 .withAuthor(new Author())
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 
     @Test
@@ -161,7 +171,6 @@ public class BookValidatorTest {
                 .withGenre(List.of("genre"))
                 .withDescription("Some description")
                 .build();
-        Set<ValidationError<Book>> errors = validator.validate(book);
-        assertEquals(1, errors.size());
+        assertEquals(1, validator.validate(book).size());
     }
 }
