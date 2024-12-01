@@ -1,12 +1,12 @@
 package com.example.books_service.core.validator.find;
 
-import com.example.books_service.core.dto.request.FindBookByIdRequest;
+import com.example.books_service.core.dto.request.FindBookByIsbnRequest;
 import com.example.books_service.core.validator.ValidationError;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
 @Component
-public interface IdValidator {
-    public Set<ValidationError> validate(FindBookByIdRequest request);
+public interface IsbnRequestValidator {
+    public Set<ValidationError> validate(FindBookByIsbnRequest request);
 }

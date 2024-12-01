@@ -2,7 +2,7 @@ package com.example.books_service.core.validator;
 
 import com.example.books_service.core.dto.Author;
 import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.request.AddBookRequest;
+import com.example.books_service.core.dto.request.AddBookRequest;
 import com.example.books_service.core.validator.author.AuthorValidator;
 import com.example.books_service.core.validator.book.BookValidator;
 import jakarta.validation.ConstraintViolation;
@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class GeneralValidatorImpl implements GeneralValidator{
+class BookAndAuthorValidatorImpl implements BookAndAuthorValidator {
     @Autowired
     private BookValidator bookValidator;
 

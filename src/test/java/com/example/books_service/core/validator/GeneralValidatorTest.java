@@ -4,7 +4,7 @@ import com.example.books_service.core.dto.Author;
 import com.example.books_service.core.dto.Book;
 import com.example.books_service.core.dto.builder.AuthorBuilder;
 import com.example.books_service.core.dto.builder.BookBuilder;
-import com.example.books_service.core.request.AddBookRequest;
+import com.example.books_service.core.dto.request.AddBookRequest;
 import com.example.books_service.core.validator.author.AuthorValidator;
 import com.example.books_service.core.validator.book.BookValidator;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 public class GeneralValidatorTest {
     @InjectMocks
-    private GeneralValidatorImpl validator;
+    private BookAndAuthorValidatorImpl validator;
 
     @Mock
     private BookValidator bookValidator;

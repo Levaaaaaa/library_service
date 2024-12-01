@@ -1,12 +1,11 @@
-package com.example.books_service.core.repos;
+package com.example.books_service.core.model.repos;
 
-import com.example.books_service.core.domain.BookEntity;
-import com.example.books_service.core.dto.Book;
+import com.example.books_service.core.model.domain.BookEntity;
+import com.example.books_service.core.model.repos.FindBookByIdRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
@@ -15,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class FindBookRepositoryTest {
+public class FindBookByIdRepositoryTest {
     @Autowired
-    private FindBookRepository repository;
+    private FindBookByIdRepository repository;
 
     @Test
     public void notNull() {

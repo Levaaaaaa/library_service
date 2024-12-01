@@ -1,4 +1,4 @@
-package com.example.books_service.core.domain;
+package com.example.books_service.core.model.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

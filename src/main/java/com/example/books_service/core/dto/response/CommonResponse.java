@@ -1,4 +1,4 @@
-package com.example.books_service.core.response;
+package com.example.books_service.core.dto.response;
 
 import com.example.books_service.core.dto.Book;
 import com.example.books_service.core.validator.ValidationError;

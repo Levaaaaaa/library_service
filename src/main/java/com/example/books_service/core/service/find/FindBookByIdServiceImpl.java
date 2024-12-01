@@ -1,26 +1,25 @@
 package com.example.books_service.core.service.find;
 
-import com.example.books_service.core.domain.AuthorEntity;
-import com.example.books_service.core.domain.BookEntity;
-import com.example.books_service.core.domain.GenreEntity;
+import com.example.books_service.core.model.domain.AuthorEntity;
+import com.example.books_service.core.model.domain.BookEntity;
+import com.example.books_service.core.model.domain.GenreEntity;
 import com.example.books_service.core.dto.Author;
 import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.repos.FindBookRepository;
-import com.example.books_service.core.request.FindBookByIdRequest;
-import com.example.books_service.core.response.CommonResponse;
+import com.example.books_service.core.model.repos.FindBookByIdRepository;
+import com.example.books_service.core.dto.request.FindBookByIdRequest;
+import com.example.books_service.core.dto.response.CommonResponse;
 import com.example.books_service.core.validator.ValidationError;
 import com.example.books_service.core.validator.find.IdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class FindBookByIdServiceImpl implements FindBookByIdService{
+class FindBookByIdServiceImpl implements FindBookByIdService{
     @Autowired
-    private FindBookRepository repository;
+    private FindBookByIdRepository repository;
 
     @Autowired
     private IdValidator validator;

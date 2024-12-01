@@ -1,8 +1,6 @@
-package com.example.books_service.core.domain;
+package com.example.books_service.core.model.domain;
 
-import com.example.books_service.core.dto.Author;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

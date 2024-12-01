@@ -1,10 +1,9 @@
-package com.example.books_service.core.service;
+package com.example.books_service.core.service.add;
 
 import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.request.AddBookRequest;
-import com.example.books_service.core.response.CommonResponse;
-import com.example.books_service.core.service.add.AddBookServiceImpl;
-import com.example.books_service.core.validator.GeneralValidator;
+import com.example.books_service.core.dto.request.AddBookRequest;
+import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.validator.BookAndAuthorValidator;
 import com.example.books_service.core.validator.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +24,7 @@ public class AddBookServiceTest {
     private AddBookServiceImpl service;
 
     @Mock
-    private GeneralValidator validator;
+    private BookAndAuthorValidator validator;
 
     private AddBookRequest request;
     private CommonResponse expectedResponse;

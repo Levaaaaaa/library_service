@@ -1,8 +1,8 @@
 package com.example.books_service.core.service.add;
 
-import com.example.books_service.core.request.AddBookRequest;
-import com.example.books_service.core.response.CommonResponse;
-import com.example.books_service.core.validator.GeneralValidator;
+import com.example.books_service.core.dto.request.AddBookRequest;
+import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.validator.BookAndAuthorValidator;
 import com.example.books_service.core.validator.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class AddBookServiceImpl implements AddBookService{
+class AddBookServiceImpl implements AddBookService{
     @Autowired
-    private GeneralValidator validator;
+    private BookAndAuthorValidator validator;
 
     @Override
     public CommonResponse addBook(AddBookRequest request) {
