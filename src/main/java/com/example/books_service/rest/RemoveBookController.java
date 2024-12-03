@@ -2,19 +2,19 @@ package com.example.books_service.rest;
 
 import com.example.books_service.core.dto.request.IsbnRequest;
 import com.example.books_service.core.dto.response.CommonResponse;
-import com.example.books_service.core.service.find.FindBookByIsbnService;
+import com.example.books_service.core.service.delete.DeleteBookByIsbnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FindBookByIsbnController {
+public class RemoveBookController {
     @Autowired
-    private FindBookByIsbnService service;
+    private DeleteBookByIsbnService service;
 
-    @GetMapping("rest/findby/isbn/{isbn}")
-    public CommonResponse findBook(@PathVariable("isbn")String isbn) {
-        return service.findByIsbn(new IsbnRequest(isbn));
+    @GetMapping(path = "rest/remove/{isbn}")
+    public CommonResponse removeBook(@PathVariable("isbn") String isbn) {
+        return service.deleteBook(new IsbnRequest(isbn));
     }
 }

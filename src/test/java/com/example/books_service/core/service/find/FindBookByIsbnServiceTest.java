@@ -1,11 +1,14 @@
 package com.example.books_service.core.service.find;
 
-import com.example.books_service.core.dto.request.FindBookByIsbnRequest;
+import com.example.books_service.core.dto.Author;
+import com.example.books_service.core.dto.Book;
+import com.example.books_service.core.dto.request.IsbnRequest;
 import com.example.books_service.core.dto.response.CommonResponse;
 import com.example.books_service.core.model.domain.AuthorEntity;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.domain.GenreEntity;
-import com.example.books_service.core.model.repos.FindBookByIsbnRepository;
+import com.example.books_service.core.model.repos.BookRepository;
+import com.example.books_service.core.utils.EntityConverter;
 import com.example.books_service.core.validator.ValidationError;
 import com.example.books_service.core.validator.find.IsbnRequestValidator;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,16 +35,19 @@ public class FindBookByIsbnServiceTest {
     private FindBookByIsbnServiceImpl service;
 
     @Mock
-    private FindBookByIsbnRepository repository;
+    private BookRepository repository;
 
     @Mock
     private IsbnRequestValidator validator;
 
-    private static FindBookByIsbnRequest request;
+    @Mock
+    private EntityConverter converter;
+
+    private static IsbnRequest request;
 
     @BeforeAll
     public static void init() {
-        request = new FindBookByIsbnRequest();
+        request = new IsbnRequest();
     }
 
     @Test
@@ -99,8 +105,11 @@ public class FindBookByIsbnServiceTest {
                         null)
         );
 
+        Book book = new Book(isbn, title, List.of(genre), description, new Author(authorFirstName, authorLastName, null, null, null));
         when(validator.validate(request)).thenReturn(new HashSet<>());
         when(repository.findByIsbn(isbn)).thenReturn(Optional.of(entity));
+        when(converter.fromEntity(entity)).thenReturn(book);
+
         CommonResponse response = service.findByIsbn(request);
 
         assertTrue(response.getErrors().isEmpty());

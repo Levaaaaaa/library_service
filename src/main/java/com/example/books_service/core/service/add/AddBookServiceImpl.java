@@ -8,29 +8,29 @@ import com.example.books_service.core.model.domain.AuthorEntity;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.domain.GenreEntity;
 import com.example.books_service.core.model.repos.FindAuthorRepository;
-import com.example.books_service.core.model.repos.FindBookByIsbnRepository;
+import com.example.books_service.core.model.repos.BookRepository;
 import com.example.books_service.core.model.repos.FindGenreRepository;
+import com.example.books_service.core.utils.EntityConverter;
 import com.example.books_service.core.validator.BookAndAuthorValidator;
 import com.example.books_service.core.validator.ValidationError;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
 
+@Transactional
 @Service
 class AddBookServiceImpl implements AddBookService{
     @Autowired
     private BookAndAuthorValidator validator;
 
     @Autowired
-    private FindBookByIsbnRepository repository;
+    private BookRepository repository;
 
     @Autowired
-    private FindAuthorRepository findAuthorRepository;
-
-    @Autowired
-    private FindGenreRepository findGenreRepository;
+    private EntityConverter entityConverter;
 
     @Override
     public CommonResponse addBook(AddBookRequest request) {
@@ -41,11 +41,10 @@ class AddBookServiceImpl implements AddBookService{
 
         Optional<BookEntity> optional = repository.findByIsbn(request.getBook().getIsbn());
         if (optional.isPresent()) {
-            errors.add(new ValidationError("Book with this ISBN already exists"));
-            return buildResponseWithErrors(errors);
+            return buildResponseWithErrors(Set.of(new ValidationError("Book with this ISBN already exists")));
         }
 
-        repository.save(toEntity(request.getBook()));
+        repository.save(entityConverter.toEntity(request.getBook()));
         return buildSuccessfulResponse(request);
     }
 
@@ -57,37 +56,5 @@ class AddBookServiceImpl implements AddBookService{
         return new CommonResponse(null, errors);
     }
 
-    private BookEntity toEntity(Book book) {
-        BookEntity result = new BookEntity();
-        result.setIsbn(book.getIsbn());
-        result.setTitle(book.getTitle());
-        result.setDescription(book.getDescription());
-        result.setGenres(book.getGenres().stream().map(this::toEntity).toList());
-        result.setAuthor(toEntity(book.getAuthor()));
-        return result;
-    }
 
-    private AuthorEntity toEntity(Author author) {
-        Optional<AuthorEntity> optional = findAuthorRepository.findByFirstNameAndLastName(author.getFirstName(), author.getLastName());
-        if (optional.isPresent()) {
-            return optional.get();
-        }
-        AuthorEntity entity = new AuthorEntity();
-        entity.setFirstName(author.getFirstName());
-        entity.setLastName(author.getLastName());
-        entity.setPatronymic(author.getPatronymic());
-        entity.setEmail(author.getEmail());
-        entity.setBirthDate(new java.sql.Date(author.getBirthDate().getTime()));
-        return entity;
-    }
-
-    private GenreEntity toEntity(String genre) {
-        Optional<GenreEntity> optional = findGenreRepository.findByGenre(genre);
-        if (optional.isPresent()) {
-            return optional.get();
-        }
-        GenreEntity entity = new GenreEntity();
-        entity.setGenre(genre);
-        return entity;
-    }
 }

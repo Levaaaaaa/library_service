@@ -25,9 +25,10 @@ create table if not exists genres (
 
 create table if not exists genres_of_books (
 	id bigint not null auto_increment,
-	book bigint references books(id) not null,
+	book bigint not null,
 	genre bigint references genres(id) not null,
-	primary key(id)
+	primary key(id),
+	constraint genres_of_books_book_fk foreign key(book) references books(id) on delete cascade
 );
 
 

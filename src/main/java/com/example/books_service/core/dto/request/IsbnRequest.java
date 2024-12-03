@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FindBookByIsbnRequest {
+public class IsbnRequest {
     @NotEmpty(message = "ISBN must not be empty")
     @Pattern(regexp = "^[0-9]{13}$", message = "ISBN can have only 13 digits")
     private String isbn;

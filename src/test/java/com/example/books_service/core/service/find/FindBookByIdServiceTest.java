@@ -3,9 +3,9 @@ package com.example.books_service.core.service.find;
 import com.example.books_service.core.model.domain.AuthorEntity;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.domain.GenreEntity;
-import com.example.books_service.core.model.repos.FindBookByIdRepository;
 import com.example.books_service.core.dto.request.FindBookByIdRequest;
 import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.model.repos.BookRepository;
 import com.example.books_service.core.validator.ValidationError;
 import com.example.books_service.core.validator.find.IdValidator;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +31,7 @@ public class FindBookByIdServiceTest {
     private FindBookByIdServiceImpl service;
 
     @Mock
-    private FindBookByIdRepository repository;
+    private BookRepository repository;
 
     @Mock
     private IdValidator validator;

@@ -5,9 +5,9 @@ import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.domain.GenreEntity;
 import com.example.books_service.core.dto.Author;
 import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.model.repos.FindBookByIdRepository;
 import com.example.books_service.core.dto.request.FindBookByIdRequest;
 import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.model.repos.BookRepository;
 import com.example.books_service.core.validator.ValidationError;
 import com.example.books_service.core.validator.find.IdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Set;
 @Service
 class FindBookByIdServiceImpl implements FindBookByIdService{
     @Autowired
-    private FindBookByIdRepository repository;
+    private BookRepository repository;
 
     @Autowired
     private IdValidator validator;
@@ -30,8 +30,7 @@ class FindBookByIdServiceImpl implements FindBookByIdService{
         if (errors.isEmpty()) {
             Optional<BookEntity> optional = repository.findById(request.getId());
             if (optional.isEmpty()) {
-                    errors.add(new ValidationError("Book not found"));
-                    return buildResponseWithErrors(errors);
+                    return buildResponseWithErrors(Set.of(new ValidationError("Book not found")));
             }
             else {
                 return buildSuccessfulResponse(optional.get());
