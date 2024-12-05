@@ -16,6 +16,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -52,12 +53,19 @@ class AddBookServiceImpl implements AddBookService{
         BookEntity bookEntity = entityConverter.toEntity(request.getBook());
         Optional<AuthorEntity> authorOptional = authorRepository.findByFirstNameAndLastName(request.getBook().getAuthor().getFirstName(), request.getBook().getAuthor().getLastName());
         if (authorOptional.isEmpty()) {
-            return buildResponseWithErrors(Set.of(new ValidationError("Author not found")));
+            AuthorEntity authorEntity = entityConverter.toEntity(request.getBook().getAuthor());
+            authorRepository.save(authorEntity);
+            bookEntity.setAuthor(authorEntity);
+            //return buildResponseWithErrors(Set.of(new ValidationError("Author not found")));
         }
+
 
         Set<Optional<GenreEntity>> genreOptional = request.getBook().getGenres().stream().map(genreRepository::findByGenre).filter(Optional::isEmpty).collect(Collectors.toSet());
         if (!genreOptional.isEmpty()) {
-            return buildResponseWithErrors(Set.of(new ValidationError("Genre not found!")));
+            List<GenreEntity> genreEntityList = request.getBook().getGenres().stream().map(entityConverter::toEntity).toList();
+            genreEntityList.forEach(genreRepository::save);
+            bookEntity.setGenres(genreEntityList);
+//            return buildResponseWithErrors(Set.of(new ValidationError("Genre not found!")));
         }
         repository.save(bookEntity);
         return buildSuccessfulResponse(request);
