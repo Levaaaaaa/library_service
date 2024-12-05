@@ -5,8 +5,11 @@ import com.example.books_service.core.dto.BookMask;
 import com.example.books_service.core.dto.request.IsbnRequest;
 import com.example.books_service.core.dto.request.UpdateBookRequest;
 import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.model.domain.BookEntity;
+import com.example.books_service.core.model.repos.BookRepository;
 import com.example.books_service.core.service.find.FindBookByIsbnService;
 import com.example.books_service.core.utils.BuildBookByMaskService;
+import com.example.books_service.core.utils.EntityConverter;
 import com.example.books_service.core.utils.SaveBookService;
 import com.example.books_service.core.validator.ValidationError;
 import com.example.books_service.core.validator.update.UpdateRequestValidator;
@@ -19,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,13 +35,13 @@ public class UpdateBookServiceTest {
     private UpdateBookServiceImpl service;
 
     @Mock
+    private BookRepository bookRepository;
+
+    @Mock
     private UpdateRequestValidator validator;
 
     @Mock
-    private SaveBookService saveBookService;
-
-    @Mock
-    private FindBookByIsbnService findBookService;
+    private EntityConverter entityConverter;
 
     @Mock
     private BuildBookByMaskService buildBookByMaskService;
@@ -61,10 +66,11 @@ public class UpdateBookServiceTest {
     //correct update
     @Test
     public void correctUpdating() {
+        BookEntity entity = new BookEntity();
         when(validator.validate(request)).thenReturn(Set.of());
-        when(saveBookService.saveBook(book)).thenReturn(book);
-        when(findBookService.findByIsbn(isbn)).thenReturn(new CommonResponse(book, Set.of()));
         when(buildBookByMaskService.buildBook(book, mask)).thenReturn(book);
+        when(bookRepository.findByIsbn(isbn.getIsbn())).thenReturn(Optional.of(entity));
+        when(entityConverter.fromEntity(entity)).thenReturn(book);
 
         CommonResponse response = service.updateBook(request);
         assertNotNull(response);
@@ -91,14 +97,7 @@ public class UpdateBookServiceTest {
     public void bookNotFound() {
         String expectedError = "Book not found";
         when(validator.validate(request)).thenReturn(Set.of());
-        when(findBookService.findByIsbn(isbn)).thenReturn(
-                new CommonResponse(
-                        null,
-                        Set.of(
-                                new ValidationError(expectedError)
-                        )
-                )
-        );
+        when(bookRepository.findByIsbn(isbn.getIsbn())).thenReturn(Optional.empty());
 
         CommonResponse response = service.updateBook(request);
         assertNotNull(response);

@@ -7,8 +7,8 @@ import com.example.books_service.core.dto.builder.BookBuilder;
 import com.example.books_service.core.model.domain.AuthorEntity;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.domain.GenreEntity;
-import com.example.books_service.core.model.repos.FindAuthorRepository;
-import com.example.books_service.core.model.repos.FindGenreRepository;
+import com.example.books_service.core.model.repos.AuthorRepository;
+import com.example.books_service.core.model.repos.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +16,10 @@ import java.util.Optional;
 @Component
 class EntityConverterImpl implements EntityConverter{
     @Autowired
-    private FindAuthorRepository findAuthorRepository;
+    private AuthorRepository authorRepository;
 
     @Autowired
-    private FindGenreRepository findGenreRepository;
+    private GenreRepository findGenreRepository;
 
     public Author fromEntity(AuthorEntity entity) {
         return AuthorBuilder.create()
@@ -56,7 +56,7 @@ class EntityConverterImpl implements EntityConverter{
     }
 
     public AuthorEntity toEntity(Author author) {
-        Optional<AuthorEntity> optional = findAuthorRepository.findByFirstNameAndLastName(author.getFirstName(), author.getLastName());
+        Optional<AuthorEntity> optional = authorRepository.findByFirstNameAndLastName(author.getFirstName(), author.getLastName());
         if (optional.isPresent()) {
             return optional.get();
         }

@@ -105,7 +105,12 @@ public class FindBookByIsbnServiceTest {
                         null)
         );
 
-        Book book = new Book(isbn, title, List.of(genre), description, new Author(authorFirstName, authorLastName, null, null, null));
+        Book book = new Book(isbn, title, List.of(genre), description,
+                new Author(authorFirstName,
+                        authorLastName,
+                        null,
+                        null,
+                        null));
         when(validator.validate(request)).thenReturn(new HashSet<>());
         when(repository.findByIsbn(isbn)).thenReturn(Optional.of(entity));
         when(converter.fromEntity(entity)).thenReturn(book);

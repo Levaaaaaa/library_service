@@ -4,10 +4,12 @@ import com.example.books_service.core.dto.Author;
 import com.example.books_service.core.dto.Book;
 import com.example.books_service.core.dto.request.AddBookRequest;
 import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.model.domain.AuthorEntity;
 import com.example.books_service.core.model.domain.BookEntity;
-import com.example.books_service.core.model.repos.FindAuthorRepository;
+import com.example.books_service.core.model.domain.GenreEntity;
+import com.example.books_service.core.model.repos.AuthorRepository;
 import com.example.books_service.core.model.repos.BookRepository;
-import com.example.books_service.core.model.repos.FindGenreRepository;
+import com.example.books_service.core.model.repos.GenreRepository;
 import com.example.books_service.core.utils.EntityConverter;
 import com.example.books_service.core.validator.BookAndAuthorValidator;
 import com.example.books_service.core.validator.ValidationError;
@@ -27,7 +29,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
 @ExtendWith(SpringExtension.class)
 public class AddBookServiceTest {
     @InjectMocks
@@ -40,6 +41,12 @@ public class AddBookServiceTest {
     private BookRepository repository;
 
     @Mock
+    private AuthorRepository authorRepository;
+
+    @Mock
+    private GenreRepository genreRepository;
+
+    @Mock
     private EntityConverter entityConverter;
 
     private static AddBookRequest request;
@@ -47,6 +54,9 @@ public class AddBookServiceTest {
     private static String isbn;
     private CommonResponse expectedResponse;
     private static BookEntity bookEntity;
+    private static String authorFirstName;
+    private static String authorLastName;
+    private static String genre;
 
     @BeforeAll
     public static void init() {
@@ -55,6 +65,14 @@ public class AddBookServiceTest {
         book.setIsbn(isbn);
         request = new AddBookRequest(book);
         bookEntity = new BookEntity();
+        authorFirstName = "";
+        authorLastName = "";
+        genre = "";
+        Author author = new Author();
+        author.setFirstName(authorFirstName);
+        author.setLastName(authorLastName);
+        book.setAuthor(author);
+        book.setGenres(List.of(genre));
     }
 
     @Test
@@ -66,6 +84,8 @@ public class AddBookServiceTest {
         when(validator.validate(request)).thenReturn(Set.of());
         when(repository.findByIsbn(isbn)).thenReturn(Optional.empty());
         when(entityConverter.toEntity(book)).thenReturn(bookEntity);
+        when(authorRepository.findByFirstNameAndLastName(authorFirstName, authorLastName)).thenReturn(Optional.of(new AuthorEntity()));
+        when(genreRepository.findByGenre(genre)).thenReturn(Optional.of(new GenreEntity()));
 
         CommonResponse response = service.addBook(request);
 

@@ -10,8 +10,8 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Book {
     @NotEmpty(message = "ISBN must be not empty")
     @Pattern(regexp = "^[0-9]{13}$", message = "ISBN can have only 13 digits")

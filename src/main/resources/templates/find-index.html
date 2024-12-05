@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+    <head>
+    </head>
+    <body>
+        <form th:action="@{/find/byisbn}" method="get">
+            <label>Find book by isbn </label>
+            <input name="isbn"/>
+            <button type="submit">Submit ISBN</button>
+        </form>
+        <div th:if="${isbnResponse != null}">
+            <td th:if="${isbnResponse?.errors != null}">
+                <div th:each="error : ${isbnResponse?.errors}">
+                    <label>ERROR: </label>
+                    <label th:text="${error.description}"/>
+                </div>
+            </td>
+            <td th:if="${isbnResponse?.book != null}">
+                <h4>BOOK IS FOUND: </h4>
+                <div th:object="${isbnResponse?.book}">
+                    <div>
+                        <label>ISBN: </label>
+                        <label th:text="*{isbn}"/>
+                    </div>
+                    <div>
+                        <label>Title: </label>
+                        <label th:text="*{title}"/>
+                    </div>
+                    <div>
+                        <label>Genres: </label>
+                        <tr th:if="${book?.genres != null}" th:each="genre : ${book?.genres}">
+                            <label th:text="*{genre}"/>
+                        </tr>
+                    </div>
+                    <div>
+                        <label>Description: </label>
+                        <label th:if="${book?.description != null}" th:text="${book?.description}"/>
+                    </div>
+                    <div th:if="${book?.author != null}" th:object="${book?.author}">
+                        <h4>Author</h4>
+                        <div>
+                            <label>First Name: </label>
+                            <label th:text="*{firstName}"/>
+                        </div>
+                        <div>
+                            <label>Last Name: </label>
+                            <label th:text="*{lastName}"/>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </div>
+        <form th:action="@{/find}" method="get">
+            <ul th:if="${allBooksResponse != null}">
+                <h2>ALL BOOKS</h2>
+                <li th:each="book : ${allBooksResponse}">
+                        <div>
+                            <label>ISBN: </label>
+                            <label th:text="*{book.isbn}"/>
+                        </div>
+                        <div>
+                            <label>Title: </label>
+                            <label th:text="*{book.title}"/>
+                        </div>
+                        <div>
+                                <label>Genres: </label>
+                                <tr th:if="${book?.genres != null}" th:each="genre : ${book?.genres}">
+                                    <label th:text="*{genre}"/>
+                                </tr>
+                        </div>
+                    <div>
+                        <label>Description: </label>
+                        <label th:if="${book?.description != null}" th:text="${book?.description}"/>
+                    </div>
+                    <div th:object="${book.author}">
+                        <h4>Author</h4>
+                        <div>
+                            <label>First Name: </label>
+                            <label th:text="*{firstName}"/>
+                        </div>
+                        <div>
+                            <label>Last Name: </label>
+                            <label th:text="*{lastName}"/>
+                        </div>
+                    </div>
+                        <hr/>
+                </li>
+            </ul>
+        </form>
+    </body>
+</html>

@@ -50,7 +50,7 @@ class UpdateBookServiceImpl implements UpdateBookService{
 
         Optional<BookEntity> optional = bookRepository.findByIsbn(request.getIsbn().getIsbn());
         if (optional.isEmpty()) {
-            buildResponseWithErrors(Set.of(new ValidationError("Book not found")));
+            return buildResponseWithErrors(Set.of(new ValidationError("Book not found")));
         }
 
         BookEntity source = optional.get();

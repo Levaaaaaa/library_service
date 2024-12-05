@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface FindAuthorRepository extends JpaRepository<AuthorEntity, Long> {
+public interface AuthorRepository extends JpaRepository<AuthorEntity, Long> {
     public Optional<AuthorEntity> findByFirstNameAndLastName(String firstName, String lastName);
 }

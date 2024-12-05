@@ -1,13 +1,7 @@
 package com.example.books_service.core.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.util.Date;
 
@@ -16,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Author {
+
     @NotEmpty(message = "First name must not be empty")
     @Size(max = 50, message = "First Name is too long, max - 50")
     private String firstName;
