@@ -1,9 +1,8 @@
 package com.example.books_service.core.validator.update;
 
-import com.example.books_service.core.dto.Author;
-import com.example.books_service.core.dto.BookMask;
-import com.example.books_service.core.dto.builder.BookMaskBuilder;
-import com.example.books_service.core.dto.builder.BookMaskBuilder;
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.BookMask;
+import com.example.books_service.core.dto.library.builder.BookMaskBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

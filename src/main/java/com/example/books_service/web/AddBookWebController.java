@@ -1,10 +1,10 @@
 package com.example.books_service.web;
 
-import com.example.books_service.core.dto.Author;
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.request.AddBookRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
-import com.example.books_service.core.service.add.AddBookService;
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.request.AddBookRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
+import com.example.books_service.core.service.library.add.AddBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

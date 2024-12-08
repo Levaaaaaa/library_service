@@ -1,8 +1,7 @@
 package com.example.books_service.core.validator.author;
 
-import com.example.books_service.core.dto.Author;
-import com.example.books_service.core.dto.builder.AuthorBuilder;
-import com.example.books_service.core.validator.author.AuthorValidator;
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.builder.AuthorBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

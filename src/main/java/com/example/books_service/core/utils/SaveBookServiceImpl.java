@@ -1,6 +1,6 @@
 package com.example.books_service.core.utils;
 
-import com.example.books_service.core.dto.Book;
+import com.example.books_service.core.dto.library.Book;
 import com.example.books_service.core.model.repos.BookRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.example.books_service.rest;
 
-import com.example.books_service.core.dto.request.IsbnRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
-import com.example.books_service.core.service.delete.DeleteBookByIsbnService;
+import com.example.books_service.core.dto.library.request.IsbnRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
+import com.example.books_service.core.service.library.delete.DeleteBookByIsbnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

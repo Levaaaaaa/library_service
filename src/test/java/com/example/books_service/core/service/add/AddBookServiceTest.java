@@ -1,15 +1,16 @@
 package com.example.books_service.core.service.add;
 
-import com.example.books_service.core.dto.Author;
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.request.AddBookRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.request.AddBookRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
 import com.example.books_service.core.model.domain.AuthorEntity;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.domain.GenreEntity;
 import com.example.books_service.core.model.repos.AuthorRepository;
 import com.example.books_service.core.model.repos.BookRepository;
 import com.example.books_service.core.model.repos.GenreRepository;
+import com.example.books_service.core.service.library.add.AddBookServiceImpl;
 import com.example.books_service.core.utils.EntityConverter;
 import com.example.books_service.core.validator.BookAndAuthorValidator;
 import com.example.books_service.core.validator.ValidationError;
@@ -18,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.HashSet;

@@ -1,6 +1,6 @@
 package com.example.books_service.core.validator.update;
 
-import com.example.books_service.core.dto.request.UpdateBookRequest;
+import com.example.books_service.core.dto.library.request.UpdateBookRequest;
 import com.example.books_service.core.validator.ValidationError;
 import org.springframework.stereotype.Component;
 

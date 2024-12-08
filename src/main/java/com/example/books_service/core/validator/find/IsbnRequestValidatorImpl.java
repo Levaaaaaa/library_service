@@ -1,6 +1,6 @@
 package com.example.books_service.core.validator.find;
 
-import com.example.books_service.core.dto.request.IsbnRequest;
+import com.example.books_service.core.dto.library.request.IsbnRequest;
 import com.example.books_service.core.validator.ValidationError;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;

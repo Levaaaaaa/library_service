@@ -1,12 +1,12 @@
 package com.example.books_service.web;
 
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.request.FindBookByIdRequest;
-import com.example.books_service.core.dto.request.IsbnRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
-import com.example.books_service.core.service.find.FindAllBooksService;
-import com.example.books_service.core.service.find.FindBookByIdService;
-import com.example.books_service.core.service.find.FindBookByIsbnService;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.request.FindBookByIdRequest;
+import com.example.books_service.core.dto.library.request.IsbnRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
+import com.example.books_service.core.service.library.find.FindAllBooksService;
+import com.example.books_service.core.service.library.find.FindBookByIdService;
+import com.example.books_service.core.service.library.find.FindBookByIsbnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,6 +1,6 @@
 package com.example.books_service.core.validator.find;
 
-import com.example.books_service.core.dto.request.FindBookByIdRequest;
+import com.example.books_service.core.dto.library.request.FindBookByIdRequest;
 import com.example.books_service.core.validator.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

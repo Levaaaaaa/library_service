@@ -1,11 +1,12 @@
 package com.example.books_service.core.service.delete;
 
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.request.IsbnRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.request.IsbnRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.repos.BookRepository;
-import com.example.books_service.core.service.find.FindBookByIsbnService;
+import com.example.books_service.core.service.library.delete.DeleteBookByIsbnServiceImpl;
+import com.example.books_service.core.service.library.find.FindBookByIsbnService;
 import com.example.books_service.core.validator.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

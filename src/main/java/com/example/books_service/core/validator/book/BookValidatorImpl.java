@@ -1,6 +1,6 @@
 package com.example.books_service.core.validator.book;
 
-import com.example.books_service.core.dto.Book;
+import com.example.books_service.core.dto.library.Book;
 import com.example.books_service.core.validator.ValidationError;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;

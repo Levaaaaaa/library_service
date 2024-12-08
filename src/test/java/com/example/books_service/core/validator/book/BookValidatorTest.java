@@ -1,16 +1,13 @@
 package com.example.books_service.core.validator.book;
 
-import com.example.books_service.core.dto.Author;
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.builder.BookBuilder;
-import com.example.books_service.core.validator.book.BookValidator;
-import jakarta.validation.ConstraintViolation;
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.builder.BookBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 

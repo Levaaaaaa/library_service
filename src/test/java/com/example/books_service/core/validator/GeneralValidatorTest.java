@@ -1,10 +1,10 @@
 package com.example.books_service.core.validator;
 
-import com.example.books_service.core.dto.Author;
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.builder.AuthorBuilder;
-import com.example.books_service.core.dto.builder.BookBuilder;
-import com.example.books_service.core.dto.request.AddBookRequest;
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.builder.AuthorBuilder;
+import com.example.books_service.core.dto.library.builder.BookBuilder;
+import com.example.books_service.core.dto.library.request.AddBookRequest;
 import com.example.books_service.core.validator.author.AuthorValidator;
 import com.example.books_service.core.validator.book.BookValidator;
 import org.junit.jupiter.api.Test;

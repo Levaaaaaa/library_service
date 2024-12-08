@@ -1,17 +1,14 @@
 package com.example.books_service.core.validator.update;
 
-import com.example.books_service.core.dto.BookMask;
-import com.example.books_service.core.dto.request.IsbnRequest;
-import com.example.books_service.core.dto.request.UpdateBookRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.dto.library.BookMask;
+import com.example.books_service.core.dto.library.request.IsbnRequest;
+import com.example.books_service.core.dto.library.request.UpdateBookRequest;
 import com.example.books_service.core.validator.ValidationError;
 import com.example.books_service.core.validator.find.IsbnRequestValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Collection;

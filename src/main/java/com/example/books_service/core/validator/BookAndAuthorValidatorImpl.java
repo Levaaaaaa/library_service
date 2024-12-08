@@ -1,8 +1,8 @@
 package com.example.books_service.core.validator;
 
-import com.example.books_service.core.dto.Author;
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.request.AddBookRequest;
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.request.AddBookRequest;
 import com.example.books_service.core.validator.author.AuthorValidator;
 import com.example.books_service.core.validator.book.BookValidator;
 import jakarta.validation.ConstraintViolation;

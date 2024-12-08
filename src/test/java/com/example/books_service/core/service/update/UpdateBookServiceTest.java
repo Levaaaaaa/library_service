@@ -1,16 +1,15 @@
 package com.example.books_service.core.service.update;
 
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.BookMask;
-import com.example.books_service.core.dto.request.IsbnRequest;
-import com.example.books_service.core.dto.request.UpdateBookRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.BookMask;
+import com.example.books_service.core.dto.library.request.IsbnRequest;
+import com.example.books_service.core.dto.library.request.UpdateBookRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.repos.BookRepository;
-import com.example.books_service.core.service.find.FindBookByIsbnService;
+import com.example.books_service.core.service.library.update.UpdateBookServiceImpl;
 import com.example.books_service.core.utils.BuildBookByMaskService;
 import com.example.books_service.core.utils.EntityConverter;
-import com.example.books_service.core.utils.SaveBookService;
 import com.example.books_service.core.validator.ValidationError;
 import com.example.books_service.core.validator.update.UpdateRequestValidator;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,11 +17,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 

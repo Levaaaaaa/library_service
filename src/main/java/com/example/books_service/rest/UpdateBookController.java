@@ -1,8 +1,8 @@
 package com.example.books_service.rest;
 
-import com.example.books_service.core.dto.request.UpdateBookRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
-import com.example.books_service.core.service.update.UpdateBookService;
+import com.example.books_service.core.dto.library.request.UpdateBookRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
+import com.example.books_service.core.service.library.update.UpdateBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

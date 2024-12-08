@@ -1,13 +1,14 @@
 package com.example.books_service.core.service.find;
 
-import com.example.books_service.core.dto.Author;
-import com.example.books_service.core.dto.Book;
-import com.example.books_service.core.dto.request.IsbnRequest;
-import com.example.books_service.core.dto.response.CommonResponse;
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.request.IsbnRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
 import com.example.books_service.core.model.domain.AuthorEntity;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.domain.GenreEntity;
 import com.example.books_service.core.model.repos.BookRepository;
+import com.example.books_service.core.service.library.find.FindBookByIsbnServiceImpl;
 import com.example.books_service.core.utils.EntityConverter;
 import com.example.books_service.core.validator.ValidationError;
 import com.example.books_service.core.validator.find.IsbnRequestValidator;

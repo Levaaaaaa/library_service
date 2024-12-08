@@ -1,6 +1,6 @@
 package com.example.books_service.core.utils;
 
-import com.example.books_service.core.dto.Book;
+import com.example.books_service.core.dto.library.Book;
 import org.springframework.stereotype.Component;
 
 @Component
