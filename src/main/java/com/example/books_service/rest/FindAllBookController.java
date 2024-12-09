@@ -13,7 +13,7 @@ public class FindAllBookController {
     @Autowired
     private FindAllBooksService service;
 
-    @GetMapping("rest/findall/")
+    @GetMapping("rest/findall")
     public List<Book> findAll() {
         return service.findAll();
     }

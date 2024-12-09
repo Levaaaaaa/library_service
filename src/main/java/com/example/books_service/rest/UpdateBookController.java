@@ -13,7 +13,7 @@ public class UpdateBookController {
     @Autowired
     private UpdateBookService service;
 
-    @PostMapping(path = "rest/update/")
+    @PostMapping(path = "rest/update")
     public CommonResponse updateBook(@RequestBody UpdateBookRequest request) {
         return service.updateBook(request);
     }

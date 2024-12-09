@@ -34,7 +34,7 @@ create table if not exists genres_of_books (
 create table if not exists users (
     id bigint not null auto_increment,
     username varchar(50) not null unique,
-    password varchar(50) not null
+    password varchar(50) not null,
     primary key(id)
 );
 

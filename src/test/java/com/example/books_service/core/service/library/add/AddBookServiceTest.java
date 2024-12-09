@@ -1,4 +1,4 @@
-package com.example.books_service.core.service.add;
+package com.example.books_service.core.service.library.add;
 
 import com.example.books_service.core.dto.library.Author;
 import com.example.books_service.core.dto.library.Book;

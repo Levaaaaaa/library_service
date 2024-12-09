@@ -1,4 +1,4 @@
-package com.example.books_service.core.service.delete;
+package com.example.books_service.core.service.library.delete;
 
 import com.example.books_service.core.dto.library.Book;
 import com.example.books_service.core.dto.library.request.IsbnRequest;

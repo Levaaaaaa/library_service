@@ -86,7 +86,9 @@ class EntityConverterImpl implements EntityConverter{
         entity.setLastName(author.getLastName());
         entity.setPatronymic(author.getPatronymic());
         entity.setEmail(author.getEmail());
-        entity.setBirthDate(new java.sql.Date(author.getBirthDate().getTime()));
+        if (author.getBirthDate() != null) {
+            entity.setBirthDate(new java.sql.Date(author.getBirthDate().getTime()));
+        }
         return entity;
     }
 

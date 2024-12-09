@@ -1,14 +1,17 @@
-package com.example.books_service.core.service.find;
+package com.example.books_service.core.service.library.find;
 
+import com.example.books_service.core.dto.library.Author;
+import com.example.books_service.core.dto.library.Book;
+import com.example.books_service.core.dto.library.request.IsbnRequest;
+import com.example.books_service.core.dto.library.response.CommonResponse;
 import com.example.books_service.core.model.domain.AuthorEntity;
 import com.example.books_service.core.model.domain.BookEntity;
 import com.example.books_service.core.model.domain.GenreEntity;
-import com.example.books_service.core.dto.library.request.FindBookByIdRequest;
-import com.example.books_service.core.dto.library.response.CommonResponse;
 import com.example.books_service.core.model.repos.BookRepository;
-import com.example.books_service.core.service.library.find.FindBookByIdServiceImpl;
+import com.example.books_service.core.service.library.find.FindBookByIsbnServiceImpl;
+import com.example.books_service.core.utils.EntityConverter;
 import com.example.books_service.core.validator.ValidationError;
-import com.example.books_service.core.validator.find.IdValidator;
+import com.example.books_service.core.validator.find.IsbnRequestValidator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,29 +26,33 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class FindBookByIdServiceTest {
+public class FindBookByIsbnServiceTest {
     @InjectMocks
-    private FindBookByIdServiceImpl service;
+    private FindBookByIsbnServiceImpl service;
 
     @Mock
     private BookRepository repository;
 
     @Mock
-    private IdValidator validator;
+    private IsbnRequestValidator validator;
 
-    private static FindBookByIdRequest request;
+    @Mock
+    private EntityConverter converter;
+
+    private static IsbnRequest request;
 
     @BeforeAll
     public static void init() {
-        request = new FindBookByIdRequest();
+        request = new IsbnRequest();
     }
 
     @Test
-    public void notNullTest() {
+    public void notNull() {
         assertNotNull(service);
     }
 
@@ -53,7 +60,7 @@ public class FindBookByIdServiceTest {
     public void invalidRequestTest() {
         String description = "invalidRequest";
         when(validator.validate(request)).thenReturn(Set.of(new ValidationError(description)));
-        CommonResponse response = service.findBookById(request);
+        CommonResponse response = service.findByIsbn(request);
 
         assertNull(response.getBook());
         assertFalse(response.getErrors().isEmpty());
@@ -67,7 +74,7 @@ public class FindBookByIdServiceTest {
         when(validator.validate(request)).thenReturn(new HashSet<>());
         when(repository.findById(id)).thenReturn(Optional.empty());
 
-        CommonResponse response = service.findBookById(request);
+        CommonResponse response = service.findByIsbn(request);
         assertFalse(response.getErrors().isEmpty());
         assertNull(response.getBook());
         assertEquals(1, response.getErrors().size());
@@ -76,17 +83,16 @@ public class FindBookByIdServiceTest {
 
     @Test
     public void bookIsFoundTest() {
-        Long id = 0L;
-        request.setId(id);
-        String isbn = "isbn",
-                title = "title",
+        String isbn = "1111111111111";
+        request.setIsbn(isbn);
+        String title = "title",
                 description = "description",
                 genre = "genre",
                 authorFirstName = "firstName",
                 authorLastName = "lastName";
         List<GenreEntity> genres = List.of(new GenreEntity(1L, genre));
         BookEntity entity = new BookEntity(
-                id,
+                1L,
                 isbn,
                 title,
                 genres,
@@ -100,9 +106,17 @@ public class FindBookByIdServiceTest {
                         null)
         );
 
+        Book book = new Book(isbn, title, List.of(genre), description,
+                new Author(authorFirstName,
+                        authorLastName,
+                        null,
+                        null,
+                        null));
         when(validator.validate(request)).thenReturn(new HashSet<>());
-        when(repository.findById(id)).thenReturn(Optional.of(entity));
-        CommonResponse response = service.findBookById(request);
+        when(repository.findByIsbn(isbn)).thenReturn(Optional.of(entity));
+        when(converter.fromEntity(entity)).thenReturn(book);
+
+        CommonResponse response = service.findByIsbn(request);
 
         assertTrue(response.getErrors().isEmpty());
         assertNotNull(response.getBook());
@@ -114,5 +128,4 @@ public class FindBookByIdServiceTest {
         assertEquals(authorFirstName, response.getBook().getAuthor().getFirstName());
         assertEquals(authorLastName, response.getBook().getAuthor().getLastName());
     }
-
 }

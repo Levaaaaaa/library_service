@@ -1,4 +1,4 @@
-package com.example.books_service.core.service.update;
+package com.example.books_service.core.service.library.update;
 
 import com.example.books_service.core.dto.library.Book;
 import com.example.books_service.core.dto.library.BookMask;
