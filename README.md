@@ -16,6 +16,11 @@
 
 Now you can send examples of requests into localhost:8080
 
+Examples (Postman workspace id):
+```2e53f17c-673d-40b9-9a88-19e3e55a1bf7```
+
+Examples was duplicated as JSON in repo
+
 <h2>How to use?</h2>
 
 - Send request ```localhost:8080/auth/signup``` and ```localhost:8080/auth/login``` with your username and password (view example)
