@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "639f1e8b-acb3-44ab-b1e4-c5451feff85b",
+		"name": "library-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31258920"
+	},
+	"item": [
+		{
+			"name": "find all",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "find by id",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "find by isbn",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "add book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzM0NDUyODA4LCJleHAiOjE3MzQ1MzkyMDh9.twIEuP2HvcpfTWgxWVIxV59nfbkl5w1j0YpWRSNJ4q0"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"isbn\" : \"1111111111112\",\r\n        \"title\" : \"Clean Code\",\r\n        \"genres\" : [\r\n            {\r\n                \"genre\" : \"computer science\"\r\n            },\r\n            {\r\n                \"genre\" : \"programming\"\r\n            }\r\n        ],\r\n        \"author\" : {\r\n            \"firstName\" : \"Robert\",\r\n            \"lastName\" : \"Martin\",\r\n            \"patronymic\": \"Cecil\",\r\n            \"birthDate\" : \"1952-12-5\",\r\n            \"email\": null\r\n        }\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/library/add"
+			},
+			"response": []
+		},
+		{
+			"name": "update book",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "delete book",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

@@ -1,6 +1,7 @@
 package com.example.books_service.core.model.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class GenreEntity {
     @Column(name = "id")
     private Long id;
 
+    @Size(max = 30, message = "Genre text is very long")
     @Column(name = "genre", nullable = false)
     private String genre;
 }

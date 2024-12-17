@@ -1,19 +1,17 @@
-package com.example.books_service.core.dto.library.response;
+package com.example.books_service.core.utils;
 
-import com.example.books_service.core.dto.library.Book;
 import com.example.books_service.core.validator.ValidationError;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommonResponse {
-    private Book book;
-    private Set<ValidationError> errors;
+public class ValidationException extends Exception{
+    private List<ValidationError> violations;
 }

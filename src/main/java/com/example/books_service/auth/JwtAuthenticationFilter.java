@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Component
@@ -23,7 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-       // logger.debug("Processing request URI: " + request.getRequestURI());
+        // logger.debug("Processing request URI: " + request.getRequestURI());
         if (request.getRequestURI().startsWith("/auth/")) {
             filterChain.doFilter(request, response);
             return;
