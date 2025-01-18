@@ -1,10 +1,8 @@
 package com.example.books_service.rest;
 
-import com.example.books_service.core.dto.auth.AuthRequest;
-import com.example.books_service.core.dto.auth.AuthResponse;
-import com.example.books_service.core.service.auth.JwtTokenService;
-import com.example.books_service.core.service.auth.LoginService;
-import com.example.books_service.core.service.auth.SignupService;
+import com.example.books_service.dto.auth.AuthRequest;
+import com.example.books_service.service.auth.LoginService;
+import com.example.books_service.service.auth.SignupService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

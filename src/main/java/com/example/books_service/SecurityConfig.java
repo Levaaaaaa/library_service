@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.decoder(jwtDecoder()))
                 )
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**", "/rest/**"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**"))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(

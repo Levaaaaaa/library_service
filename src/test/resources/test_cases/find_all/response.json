@@ -1,0 +1,50 @@
+[ {
+  "id" : 1,
+  "isbn" : "1111111111111",
+  "title" : "Test title 1",
+  "genres" : [ {
+    "genre" : "fantasy"
+  }, {
+    "genre" : "epos"
+  } ],
+  "description" : null,
+  "author" : {
+    "firstName" : "John",
+    "lastName" : "Test author 1",
+    "patronymic" : null,
+    "birthDate" : null,
+    "email" : null
+  }
+}, {
+  "id" : 2,
+  "isbn" : "2222222222222",
+  "title" : "Test title 2",
+  "genres" : [ {
+    "genre" : "poetry"
+  } ],
+  "description" : null,
+  "author" : {
+    "firstName" : "Alexandr",
+    "lastName" : "Test author 2",
+    "patronymic" : null,
+    "birthDate" : null,
+    "email" : null
+  }
+}, {
+  "id" : 3,
+  "isbn" : "3333333333333",
+  "title" : "Test title 3",
+  "genres" : [ {
+    "genre" : "poetry"
+  }, {
+    "genre" : "lyrics"
+  } ],
+  "description" : null,
+  "author" : {
+    "firstName" : "Maxim",
+    "lastName" : "Test author 3",
+    "patronymic" : null,
+    "birthDate" : null,
+    "email" : null
+  }
+} ]

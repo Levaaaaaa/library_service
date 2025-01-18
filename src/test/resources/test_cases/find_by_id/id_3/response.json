@@ -1,0 +1,18 @@
+{
+  "id" : 3,
+  "isbn" : "3333333333333",
+  "title" : "Test title 3",
+  "genres" : [ {
+    "genre" : "poetry"
+  }, {
+    "genre" : "lyrics"
+  } ],
+  "description" : null,
+  "author" : {
+    "firstName" : "Maxim",
+    "lastName" : "Test author 3",
+    "patronymic" : null,
+    "birthDate" : null,
+    "email" : null
+  }
+}

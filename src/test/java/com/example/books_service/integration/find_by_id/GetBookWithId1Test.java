@@ -1,0 +1,32 @@
+package com.example.books_service.integration.find_by_id;
+
+import com.example.books_service.TestSecurityConfig;
+import com.example.books_service.integration.AbstractRestControllerTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@Import(TestSecurityConfig.class)
+public class GetBookWithId1Test extends AbstractRestControllerTest {
+
+    @Override
+    protected String getUrl() {
+        return "/find/id/1";
+    }
+
+    @Override
+    protected String getFolderName() {
+        return "find_by_id/id_1";
+    }
+
+    @Override
+    @Test
+    @WithMockUser(roles = "USER")
+    public void execute() throws Exception{
+        getRequestExecuteAndCompare();
+    }
+}
