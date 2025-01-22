@@ -2,6 +2,7 @@ package com.example.books_service.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 

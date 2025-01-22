@@ -1,5 +1,6 @@
 package com.example.books_service.service.library;
 
+import com.amazonaws.services.shield.model.ResourceAlreadyExistsException;
 import com.example.books_service.dto.BookDTO;
 import com.example.books_service.entities.AuthorEntity;
 import com.example.books_service.entities.BookEntity;
@@ -8,14 +9,13 @@ import com.example.books_service.repos.AuthorRepository;
 import com.example.books_service.repos.BookRepository;
 import com.example.books_service.repos.GenreRepository;
 import com.example.books_service.utils.BookMapper;
-import com.example.books_service.utils.ValidationException;
-import com.example.books_service.validator.ValidationError;
 import com.example.books_service.validator.ValidationService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,17 +45,18 @@ public class CrudServiceImpl implements CrudService{
 
     @Override
     public void add(List<BookDTO> books) {
-        //if (validationService.isValidBooksList(books)) {
-            List<BookEntity> bookEntiites = books.stream()
-                    .map(bookMapper::toEntity)
-                    .filter(book ->
+        //if (validationService.isValidBooksList(books))
+            List<BookEntity> bookEntities = books.stream()
+                    .map(bookMapper::toEntity).toList();
+            bookEntities.forEach(book ->
                     {
-                        return bookRepository.findByIsbn(book.getIsbn()).isEmpty();
-                    })
-                    .map(this::updateGenres)
-                    .toList();
+                        if(bookRepository.findByIsbn(book.getIsbn()).isPresent()) {
+                            throw new ResourceAlreadyExistsException("Book `" + book.getTitle() + "` already exists!");
+                        }
+                    });
+            bookEntities.forEach(this::updateGenres);
             bookRepository.saveAll(
-                    bookEntiites
+                    bookEntities
             );
         //}
     }
@@ -98,8 +99,15 @@ public class CrudServiceImpl implements CrudService{
     }
 
     @Override
-    public void deleteById(Long id) {
-        bookRepository.deleteById(id);
+    public String deleteById(Long id) {
+        Optional<BookEntity> optionalBook = bookRepository.findById(id);
+        if (optionalBook.isPresent()) {
+            bookRepository.deleteById(id);
+            return optionalBook.get().getTitle();
+        }
+        else {
+            throw new EntityNotFoundException("Book with id " + id + " not found!");
+        }
     }
 
     //or can add all genres into one transaction
@@ -108,7 +116,7 @@ public class CrudServiceImpl implements CrudService{
         oldBook.setTitle(newBook.getTitle());
         oldBook.setDescription(newBook.getDescription());
         oldBook.setAuthor(newBook.getAuthor());
-        oldBook.setGenres(newBook.getGenres());
+        oldBook = updateGenres(newBook);
         return oldBook;
     }
 

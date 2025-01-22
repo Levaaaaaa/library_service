@@ -1,0 +1,18 @@
+{
+  "id" : 1,
+  "isbn" : "1111111111111",
+  "title" : "Updated title 1",
+  "genres" : [ {
+    "genre" : "fantasy"
+  }, {
+    "genre" : "epos"
+  } ],
+  "description" : null,
+  "author" : {
+    "firstName" : "John",
+    "lastName" : "Test author 1",
+    "patronymic" : null,
+    "birthDate" : null,
+    "email" : null
+  }
+}

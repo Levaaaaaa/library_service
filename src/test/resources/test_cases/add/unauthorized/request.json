@@ -1,0 +1,21 @@
+[
+  {
+    "isbn" : "1111111111112",
+    "title" : "Clean Code",
+    "genres" : [
+      {
+        "genre" : "computer science"
+      },
+      {
+        "genre" : "programming"
+      }
+    ],
+    "author" : {
+      "firstName" : "Robert",
+      "lastName" : "Martin",
+      "patronymic": "Cecil",
+      "birthDate" : "1952-12-05",
+      "email": null
+    }
+  }
+]

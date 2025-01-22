@@ -188,6 +188,21 @@
 			<version>1.0.0</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-shield -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-shield</artifactId>
+			<version>1.12.780</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-api -->
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite</artifactId>
+			<version>1.11.4</version>
+			<scope>test</scope>
+		</dependency>
+
 
 	</dependencies>
 

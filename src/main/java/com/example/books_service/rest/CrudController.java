@@ -1,9 +1,11 @@
 package com.example.books_service.rest;
 
 import com.example.books_service.dto.BookDTO;
+import com.example.books_service.dto.Response;
 import com.example.books_service.entities.BookEntity;
 import com.example.books_service.service.library.CrudService;
 
+import com.example.books_service.utils.ErrorResponse;
 import com.example.books_service.utils.ValidationException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -29,12 +31,12 @@ public class CrudController {
         return crudService.findAll();
     }
 
-    @GetMapping("find/id/{id}")
+    @GetMapping("/find/id/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") @Positive(message = "id must be positive") Long id) {
             return ResponseEntity.ok(crudService.findById(id));
     }
 
-    @GetMapping("find/isbn/{isbn}")
+    @GetMapping("/find/isbn/{isbn}")
     public ResponseEntity<?> findByIsbn(@PathVariable("isbn") String isbn) {
             return ResponseEntity.ok(crudService.findByIsbn(isbn));
     }
@@ -42,18 +44,18 @@ public class CrudController {
     @PostMapping("add")
     public ResponseEntity<?> addBooksList(@RequestBody @NotEmpty(message = "Empty request") List<@Valid BookDTO> books) {
         crudService.add(books);
-        return ResponseEntity.ok("All books was added successfully!");
+        return ResponseEntity.ok(new Response("All books were added successfully!"));
     }
 
     @PutMapping("update/{id}")
     public ResponseEntity<?> updateById(@PathVariable("id") Long id, @RequestBody @Valid BookDTO book) {
         crudService.updateById(id, book);
-        return ResponseEntity.ok("Book with id " + id + "is updated successfully!");
+        return ResponseEntity.ok(new Response("Book with id " + id + " is updated successfully!"));
     }
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
-        crudService.deleteById(id);
-        return ResponseEntity.ok("Operation successful!");
+        String deletedBookTitle = crudService.deleteById(id);
+        return ResponseEntity.ok(new Response("Book `" + deletedBookTitle + "` was deleted successful!"));
     }
 }

@@ -14,6 +14,6 @@ public interface CrudService {
     public BookDTO findByIsbn(String isbn) throws EntityNotFoundException;
     public List<BookDTO> findAll();
     public void updateById(Long id, BookDTO book) throws EntityNotFoundException;
-    public void deleteById(Long id);
+    public String deleteById(Long id);
 }
 

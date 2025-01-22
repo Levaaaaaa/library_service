@@ -4,21 +4,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GetAllBooksTest extends AbstractTestFindAll {
+public class GetAllBookUnauthorizedTest extends AbstractTestFindAll {
 
     @Override
     protected String getFolderName() {
-        return super.getFolderName() + "/ok";
+        return super.getFolderName() + "/unauthorized";
     }
 
     @Override
     @Test
-    @WithMockUser(roles = "USER")
     public void execute() throws Exception {
-        executeAndCompareGet(HttpStatus.OK);
+        executeAndCompareGet(HttpStatus.UNAUTHORIZED);
     }
 }

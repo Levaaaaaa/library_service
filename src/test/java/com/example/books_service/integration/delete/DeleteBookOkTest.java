@@ -1,32 +1,29 @@
-package com.example.books_service.integration.find_by_id;
+package com.example.books_service.integration.delete;
 
-import com.example.books_service.TestSecurityConfig;
-import com.example.books_service.integration.AbstractTestRestController;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Import(TestSecurityConfig.class)
-public class GetBookWithId2Test extends AbstractTestRestController {
+public class DeleteBookOkTest extends AbstractTestDeleteBookById {
     @Override
     protected String getUrl() {
-        return "/find/id/2";
+        return super.getUrl() + "/1";
     }
 
     @Override
     protected String getFolderName() {
-        return "find_by_id/id_2";
+        return super.getFolderName() + "/ok";
     }
 
     @Override
     @Test
     @WithMockUser(roles = "USER")
     public void execute() throws Exception {
-        executeAndCompareGet(HttpStatus.OK);
+        executeAndCompareDelete(HttpStatus.OK);
     }
 }

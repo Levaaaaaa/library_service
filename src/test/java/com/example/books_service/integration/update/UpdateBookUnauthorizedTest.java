@@ -1,24 +1,26 @@
-package com.example.books_service.integration.find_all;
+package com.example.books_service.integration.update;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GetAllBooksTest extends AbstractTestFindAll {
+public class UpdateBookUnauthorizedTest extends AbstractTestUpdate {
+    @Override
+    protected String getUrl() {
+        return super.getUrl() + "/1";
+    }
 
     @Override
     protected String getFolderName() {
-        return super.getFolderName() + "/ok";
+        return super.getFolderName() + "/unauthorized";
     }
 
     @Override
     @Test
-    @WithMockUser(roles = "USER")
     public void execute() throws Exception {
-        executeAndCompareGet(HttpStatus.OK);
+        executeAndCompareDelete(HttpStatus.UNAUTHORIZED);
     }
 }

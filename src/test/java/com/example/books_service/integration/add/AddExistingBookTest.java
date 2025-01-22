@@ -1,4 +1,4 @@
-package com.example.books_service.integration.find_all;
+package com.example.books_service.integration.add;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -8,17 +8,16 @@ import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GetAllBooksTest extends AbstractTestFindAll {
-
+public class AddExistingBookTest extends AbstractTestAddBook {
     @Override
     protected String getFolderName() {
-        return super.getFolderName() + "/ok";
+        return super.getFolderName() + "/add_existing_book";
     }
 
     @Override
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "user")
     public void execute() throws Exception {
-        executeAndCompareGet(HttpStatus.OK);
+        executeAndComparePost(HttpStatus.CONFLICT);
     }
 }

@@ -1,32 +1,28 @@
-package com.example.books_service.integration.find_by_id;
+package com.example.books_service.integration.update;
 
-import com.example.books_service.TestSecurityConfig;
-import com.example.books_service.integration.AbstractTestRestController;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Import(TestSecurityConfig.class)
-public class GetBookWithId2Test extends AbstractTestRestController {
+public class UpdateNotExistingBookTest extends AbstractTestUpdate {
     @Override
     protected String getUrl() {
-        return "/find/id/2";
+        return super.getUrl() + "/50";
     }
 
     @Override
     protected String getFolderName() {
-        return "find_by_id/id_2";
+        return super.getFolderName() + "/not_existing_book";
     }
 
     @Override
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser
     public void execute() throws Exception {
-        executeAndCompareGet(HttpStatus.OK);
+        executeAndComparePut(HttpStatus.NOT_FOUND);
     }
 }
