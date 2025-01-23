@@ -1,6 +1,7 @@
 package com.example.books_service.service.library;
 
 import com.amazonaws.services.shield.model.ResourceAlreadyExistsException;
+import com.example.books_service.dto.AuthorDTO;
 import com.example.books_service.dto.BookDTO;
 import com.example.books_service.entities.AuthorEntity;
 import com.example.books_service.entities.BookEntity;
@@ -8,6 +9,7 @@ import com.example.books_service.entities.GenreEntity;
 import com.example.books_service.repos.AuthorRepository;
 import com.example.books_service.repos.BookRepository;
 import com.example.books_service.repos.GenreRepository;
+import com.example.books_service.utils.AuthorMapper;
 import com.example.books_service.utils.BookMapper;
 import com.example.books_service.validator.ValidationService;
 import jakarta.persistence.EntityNotFoundException;
@@ -54,7 +56,7 @@ public class CrudServiceImpl implements CrudService{
                             throw new ResourceAlreadyExistsException("Book `" + book.getTitle() + "` already exists!");
                         }
                     });
-            bookEntities.forEach(this::updateGenres);
+            bookEntities.forEach(book -> book.setGenres(updateGenres(book)));
             bookRepository.saveAll(
                     bookEntities
             );
@@ -93,7 +95,8 @@ public class CrudServiceImpl implements CrudService{
             }
 
             BookEntity foundBook = optionalBook.get();
-            foundBook = updateBookFields(foundBook, bookMapper.toEntity(book));
+            updateBookFields(foundBook, bookMapper.toEntity(book));
+            //bookRepository.save(foundBook);
             bookRepository.save(foundBook);
         //}
     }
@@ -112,16 +115,18 @@ public class CrudServiceImpl implements CrudService{
 
     //or can add all genres into one transaction
     private BookEntity updateBookFields(BookEntity oldBook, BookEntity newBook) {
+
         oldBook.setIsbn(newBook.getIsbn());
         oldBook.setTitle(newBook.getTitle());
         oldBook.setDescription(newBook.getDescription());
-        oldBook.setAuthor(newBook.getAuthor());
-        oldBook = updateGenres(newBook);
+        //oldBook.setAuthor(newBook.getAuthor());
+        oldBook.setGenres(updateGenres(newBook));
+        oldBook.setAuthor(updateAuthor(newBook.getAuthor()));
         return oldBook;
     }
 
-    private BookEntity updateGenres(BookEntity bookEntity) {
-        bookEntity.setGenres(
+    private List<GenreEntity> updateGenres(BookEntity bookEntity) {
+        return
                 bookEntity.getGenres().stream()
                         .map(genre -> {
                             Optional<GenreEntity> optionalGenre = genreRepository.findByGenre(genre.getGenre());
@@ -132,10 +137,23 @@ public class CrudServiceImpl implements CrudService{
                             else {
                                 return optionalGenre.get();
                             }
-                        })
-                        .toList()
-        );
-        return  bookEntity;
+                        }).collect(Collectors.toList());
+
+    }
+
+    private AuthorEntity updateAuthor(AuthorEntity newAuthor) {
+        Optional<AuthorEntity> optionalAuthor = authorRepository.findByFirstNameAndLastName(newAuthor.getFirstName(), newAuthor.getLastName());
+        if (optionalAuthor.isPresent()) {
+            AuthorEntity oldAuthor = optionalAuthor.get();
+            oldAuthor.setBirthDate(newAuthor.getBirthDate());
+            oldAuthor.setPatronymic(newAuthor.getPatronymic());
+            oldAuthor.setEmail(newAuthor.getEmail());
+            authorRepository.save(oldAuthor);
+            return oldAuthor;
+        }
+
+        authorRepository.save(newAuthor);
+        return newAuthor;
     }
 
     //todo update authors

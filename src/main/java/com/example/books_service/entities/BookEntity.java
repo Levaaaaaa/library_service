@@ -42,7 +42,7 @@ public class BookEntity {
 
     @NotNull(message = "Book must have an author")
     //todo remove cascade type
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "author", nullable = false)
     private AuthorEntity author;
 }
